@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+
+  "name": "Webcomic Archival Reading",
+  "description": "Lightweight tool to make reading webcomic archives more enjoyable.",
+  "version": "1.1",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.daisyowl.com/*",
+        "*://*.xkcd.com/*",
+        "*://*.drmcninja.com/*",
+        "*://*.smbc-comics.com/*",
+        "*://*.qwantz.com/*",
+        "*://*.thepunchlineismachismo.com/*",
+        "*://*.mspaintadventures.com/*",
+        "*://*.alicegrove.com/*",
+        "*://*.buttersafe.com/*",
+        "*://*.dresdencodak.com/*",
+        "*://*.extrafabulouscomics.com/*",
+        "*://*.gunnerkrigg.com/*",
+        "*://*.harkavagrant.com/*",
+        "*://*.lackadaisycats.com/*",
+        "*://*.paradoxspace.com/*",
+        "*://*.poorlydrawnlines.com/*",
+        "*://*.prequeladventure.com/*",
+        "*://*.romanticallyapocalyptic.com/*",
+        "*://*.samandfuzzy.com/*",
+        "*://*.collectedcurios.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
