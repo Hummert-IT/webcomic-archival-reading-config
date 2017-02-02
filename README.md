@@ -1,2 +1,2 @@
 # webcomic-reading
-JSON configuration for websites
+Quality-of-life tweaks for webcomics
