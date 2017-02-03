@@ -43,7 +43,7 @@
 			"prev":  ".prepostnav > a.prev",
 			"next":  ".prepostnav > a.next",
 			"comic": "#comic > img",
-			"patts": ["[0-9]+p[0-9]+"],
+			"patts": ["[0-9]+?p[0-9]+"],
 			"style": "\
 				background:rgba(255,255,255,.8);\
 				margin:0 0 30px;\
