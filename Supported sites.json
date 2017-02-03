@@ -43,7 +43,7 @@
 			"prev":  ".prepostnav > a.prev",
 			"next":  ".prepostnav > a.next",
 			"comic": "#comic > img",
-			"patts": "[/[0-9]+?p[0-9]+/g]",
+			"patts": ["[0-9]+p[0-9]+"],
 			"style": "\
 				background:rgba(255,255,255,.8);\
 				margin:0 0 30px;\
@@ -55,7 +55,7 @@
 			"next":  ".nav > a[rel=next]",
 			"comic": "#cc-comic",
 			"after": "#aftercomic img",
-			"patts": "[/[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]/g]",
+			"patts": ["[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]"],
 			"style": "\
 				background:rgba(255,255,255,.8);\
 				margin:0 0 16px;\
