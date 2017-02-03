@@ -17,7 +17,7 @@
 			"comic": "#comic > img",
 			"style": " background:rgba(255,255,255,.8); margin:7px auto 30px; text-decoration: none !important; "
 		},
-		"what-if.xkcd.com": { // Must be loaded after xkcd.com due to reversed "for" loop
+		"what-if.xkcd.com": {
 			"prev": ".nav-prev > a",
 			"next": ".nav-next > a",
 			"comic": "img.illustration",
