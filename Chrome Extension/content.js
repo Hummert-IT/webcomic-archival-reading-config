@@ -1,284 +1,153 @@
 class ComicWebsite {
-		constructor(config) {
-			this.prev = document.querySelector(config.prev)
-			this.next = document.querySelector(config.next)
-			this.comic = document.querySelector(config.comic)
-			this.after = document.querySelector(config.after)
-			this.patts = config.patts
-			this.style = config.style
-		}
+	constructor(config) {
+		this.prev = document.querySelector(config.prev)
+		this.next = document.querySelector(config.next)
 
-		get imageNode() {
-			return this.comic
+		this.comic = document.querySelectorAll(config.comic)
+		this.after = document.querySelector(config.after)
+		this.patts = []
+		if (config.patts !== undefined) {
+			for (var i = config.patts.length - 1; i >= 0; i--) {
+				this.patts.push(new RegExp(config.patts[i], 'g'))
+			}
 		}
+		this.style = config.style
 
-		navigate() {
-			// Following snippet adapted from Karl Ding, http://github.com/karlding
-			var prev = this.prev
-			var next = this.next
-			window.addEventListener('keydown', function(e) {
-				switch (e.keyCode) {
-			    case 74: case 37: // left, j
-			    	if (prev !== null) {
-			    		prev.click()
-			    	}
-				    break;
-			    case 76: case 39: // right, l
-			    	if (next !== null) {
-			    		next.click()
-			    	}
-				    break;
-			  }
-			})
-		}
+		this.expand_s = document.querySelectorAll(config.expand_s)
+		this.expand_d = document.querySelectorAll(config.expand_d)
+		this.expand_c = config.expand_c
+	}
 
-		copy() {
-			if (this.comic !== null) {
-				var alt_data = this.comic.getAttribute('title')
-				if (this.patts !== undefined) {
-					for (var i = this.patts.length - 1; i >= 0; i--) {
-						if (alt_data.search(this.patts[i]) !== -1) {
-							alt_data = null
+	navigate() {
+		var prev = this.prev
+		var next = this.next
+
+		// Following snippet adapted from Karl Ding, http://github.com/karlding
+		window.addEventListener('keydown', function(e) {
+			switch (e.keyCode) {
+		    case 74: case 37: // left, j
+		    	if (prev !== null) {
+		    		prev.click()
+		    	}
+			    break;
+		    case 76: case 39: // right, l
+		    	if (next !== null) {
+		    		next.click()
+		    	}
+			    break;
+		  }
+		})
+	}
+
+	copy() {
+		if (this.comic !== []) {
+			for (var i = this.comic.length - 1; i >= 0; i--) {
+				var comic = this.comic[i]
+				var alt_data = comic.getAttribute('title')
+
+				if (this.patts !== []) {
+					for (var ii = this.patts.length - 1; ii >= 0; ii--) {
+						if (alt_data.search(this.patts[ii]) !== -1) {
+							alt_data = undefined
 							break
 						}
 					}
 				}
 
-				if (alt_data != null || this.after !== null) {
+				if (alt_data || this.after) {
 					var wrapper = document.createElement('div')
-					this.comic.parentNode.appendChild(wrapper)
+					// comic.parentNode.appendChild(wrapper)
+					comic.parentNode.insertBefore(wrapper, comic.nextSibling)
 					wrapper.setAttribute('style', 'display:none;')
 
-					if (alt_data != null) {
+					if (alt_data) {
 						var alt_text = document.createElement('p')
 						var alt_text_node = document.createTextNode(alt_data)
 						alt_text.appendChild(alt_text_node)
 						wrapper.appendChild(alt_text)
 						if (this.style !== undefined) {
-							alt_text.setAttribute('style', this.style)
+							alt_text.setAttribute('style', 'text-align:center;' + this.style)
 						}
 					}
-					if (this.after !== null) {
-						console.log(this.after)
+					if (this.after) {
 						wrapper.insertAdjacentHTML('beforeend', this.after.outerHTML)
+						//comic.parentNode.insertBefore(wrapper, comic.nextSibling)
 					}
 					
-					wrapper.setAttribute('style', 'width:' + this.comic.width + 'px; margin: 0 auto')
+					wrapper.setAttribute('style', 'width:' + comic.width + 'px; margin: 0 auto')
 				}
 			}
 		}
 	}
 
-(function() {
+	expand() {
+		if (this.expand_s.length === this.expand_d.length && this.expand_s !== []) {
+			for (var i = this.expand_s.length - 1; i >= 0; i--) {
+				var source = this.expand_s[i]
+				var destin = this.expand_d[i]
+
+				destin.setAttribute('style', this.expand_c)
+				destin.innerHTML = ' [' + source.innerHTML '] '
+				source.parentNode.removeChild(source)
+			}
+		}
+	}
+}
+
+function processWebsites(response) {
+	var supported_data = JSON.parse(response)
+	var supported_sites = Object.keys(supported_data)
 	var host = window.location.hostname
 
-	// Dinosaur Comics
-	if (host.search('qwantz.com') !== -1) {
-		var site = new ComicWebsite({
-			prev:  'a[rel=prev]',
-			next:  'a[rel=next]',
-			comic: 'img.comic',
-			style: '\
-				background:rgba(255,255,255,.8);\
-				padding:7px;\
-				margin:7px 0;\
-				'
+	for (var i = supported_sites.length - 1; i >= 0; i--) {
+		var supported_site = supported_sites[i]
+		if (host.search(supported_site) !== -1){
+			site = new ComicWebsite(supported_data[supported_site])
+			site.navigate()
+			site.expand()
+			window.onload = function() {
+				site.copy()
+			}
+			break
+		}
+	}
+}
+
+(function() {
+	// Following class from tggagne, http://stackoverflow.com/a/22076667
+	var HttpClient = function() {
+	  this.get = function(aUrl, aCallback) {
+	    var anHttpRequest = new XMLHttpRequest();
+	    anHttpRequest.onreadystatechange = function() { 
+	      if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+	        aCallback(anHttpRequest.responseText);
+	    }
+
+	    anHttpRequest.open( "GET", aUrl, true );            
+	    anHttpRequest.send( null );
+	  }
+	}
+
+	if (sessionStorage.supported_data) {
+		processWebsites(JSON.parse(sessionStorage.supported_data))
+
+	} else {
+		var client = new HttpClient()
+		client.get('https://raw.githubusercontent.com/Hummert-IT/webcomic-reading/master/Supported%20sites.json', function(response) {
+			sessionStorage.supported_data = response
+			processWebsites(response)
 		})
 	}
 
-	// Daisy Owl
-	else if (host.search('daisyowl.com') !== -1) {
-		var site = new ComicWebsite({
-			prev:  '.nav > a:first-of-type',
-			next:  '.nav > a:last-of-type',
-			comic: '.main > div:nth-of-type(2) img',
-			style: '\
-				background:rgba(255,255,255,.8);\
-				padding:7px;\
-				margin: 0 0 20px;\
-				'
-		})
-	}
-
-	// What If?
-	else if (host.search('what-if.xkcd.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '.nav-prev > a',
-			next: '.nav-next > a'
-		})
-	}
-
-	// XKCD
-	else if (host.search('xkcd.com') !== -1) {
-		var site = new ComicWebsite({
-			prev:  '.comicNav a[rel=prev]',
-			next:  '.comicNav a[rel=next]',
-			comic: '#comic > img',
-			style: '\
-				background:rgba(255,255,255,.8);\
-				margin:7px auto 30px;\
-				text-decoration: none !important;\
-				'
-		})
-	} 
-
-	// Dr. McNinja
-	else if (host.search('drmcninja.com') !== -1) {
-		var site = new ComicWebsite({
-			prev:  '.prepostnav > a.prev',
-			next:  '.prepostnav > a.next',
-			comic: '#comic > img',
-			patts: [/[0-9]+?p[0-9]+/g],
-			style: '\
-				background:rgba(255,255,255,.8);\
-				margin:0 0 30px;\
-				text-decoration: none !important;\
-				'
-		})
-	} 
-
-  // Saturday Morning Breakfast Cereal
-	else if (host.search('smbc-comics.com') !== -1) {
-		var site = new ComicWebsite({
-			prev:  '.nav > a[rel=prev]',
-			next:  '.nav > a[rel=next]',
-			comic: '#cc-comic',
-			after: '#aftercomic img',
-			patts: [/[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]/g],
-			style: '\
-				background:rgba(255,255,255,.8);\
-				margin:0 0 16px;\
-				text-decoration: none !important;\
-				'
-		})
-	} 
-
-	// MS Paint Adventures
-	else if (host.search('mspaintadventures.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: 'html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > span > b:nth-of-type(2) > a',
-			next: 'html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > font:last-of-type > a'
-		})
+	
 
 	// Dialog button cleanup for macOS
-		var button_selector = '.button'
-		var button_element = document.querySelector(button_selector)
-		if (button_element !== null) {
-			button_element.removeAttribute('onmouseover')
-			button_element.removeAttribute('onmouseout')
-			button_element.click()
-		}
-	} 
-
-	// Alice Grove
-	else if (host.search('alicegrove.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '.comic-pagination > a:nth-of-type(2)',
-			next: '.comic-pagination > a:nth-of-type(3)'
-		})
-	} 
-
-	// Buttersafe
-	else if (host.search('buttersafe.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: 'a[rel=prev]',
-			next: 'a[rel=next]'
-		})
-	}
-
-	// Dresden Codak
-	else if (host.search('dresdencodak.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: 'a[rel=prev]',
-			next: 'a[rel=next]'
-		})
-	}
-
-	// Dresden Codak
-	else if (host.search('extrafabulouscomics.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: 'a[rel=prev]',
-			next: 'a[rel=next]'
-		})
-	}
-
-	// Gunnerkrigg Court
-	else if (host.search('gunnerkrigg.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '.extra > .nav > a.left',
-			next: '.extra > .nav > a.right'
-		})
-	}
-
-	// Hark, a Vagrant!
-	else if (host.search('harkavagrant.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: 'html > body > div > center > table > tbody > tr > td > center > a:first-of-type',
-			next: 'html > body > div > center > table > tbody > tr > td > center > a:last-of-type'
-		})
-	}
-
-	// Lackadaisy Cats
-	else if (host.search('lackadaisycats.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '.prev > a',
-			next: '.next > a'
-		})
-	}
-
-	// Paradox Space
-	else if (host.search('paradoxspace.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '.prev-page > a',
-			next: '.next-page > a'
-		})
-	}
-
-	// Poorly Drawn Lines
-	else if (host.search('poorlydrawnlines.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: 'a[rel=prev]',
-			next: 'a[rel=next]'
-		})
-	}
-
-	// Prequel
-	else if (host.search('prequeladventure.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '.previous > a[rel=prev]',
-			next: '.next > a[rel=next]'
-		})
-	}
-
-	// Romantically Apocalyptic
-	else if (host.search('romanticallyapocalyptic.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: 'a[accesskey=p]',
-			next: 'a[accesskey=n]'
-		})
-	}
-
-	// Sam & Fuzzy
-	else if (host.search('samandfuzzy.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '.prev-page > a',
-			next: '.next-page > a'
-		})
-	}
-
-	// Collected Curios
-	else if (host.search('collectedcurios.com') !== -1) {
-		var site = new ComicWebsite({
-			prev: '#nav > a:nth-of-type(3)',
-			next: '#nav > a:nth-of-type(4)'
-		})
-	}
-
-	// Do the things
-	if (site !== undefined) {
-		site.navigate()
-		window.onload = function() {
-			site.copy()
-		}
-	}
+	//	var button_selector = '.button'
+	//	var button_element = document.querySelector(button_selector)
+	//	if (button_element !== null) {
+	//		button_element.removeAttribute('onmouseover')
+	//		button_element.removeAttribute('onmouseout')
+	//		button_element.click()
+	//	}
+	//}
 })()

@@ -3,32 +3,35 @@
 		"prev":  "a[rel=prev]",
 		"next":  "a[rel=next]",
 		"comic": "img.comic",
-		"style": " background:rgba(255,255,255,.8); padding:7px; margin:7px 0; "
+		"style": "background:rgba(255,255,255,.8);padding:7px;margin:7px 0;"
 		},
 	"daisyowl.com": {
 		"prev":  ".nav > a:first-of-type",
 		"next":  ".nav > a:last-of-type",
 		"comic": ".main > div:nth-of-type(2) img",
-		"style": " background:rgba(255,255,255,.8); padding:7px; margin: 0 0 20px; "
+		"style": "padding:7px;margin: 0 0 20px;"
 	},
 	"xkcd.com": {
 		"prev":  ".comicNav a[rel=prev]",
 		"next":  ".comicNav a[rel=next]",
 		"comic": "#comic > img",
-		"style": " background:rgba(255,255,255,.8); margin:7px auto 30px; text-decoration: none !important; "
+		"style": "margin:7px auto 30px;text-decoration: none !important;"
 	},
 	"what-if.xkcd.com": {
 		"prev": ".nav-prev > a",
 		"next": ".nav-next > a",
 		"comic": "img.illustration",
-		"style": " margin:0 auto; text-decoration: none !important; font-style: oblique; "
+		"style": "margin:0 auto;text-decoration: none !important;font-style: oblique;",
+		"expand_s": ".refnum",
+		"expand_d": ".refbody",
+		"expand_c": "bottom:0;text-decoration: none;cursor: default;"
 	},
 	"drmcninja.com": {
 		"prev":  ".prepostnav > a.prev",
 		"next":  ".prepostnav > a.next",
 		"comic": "#comic > img",
 		"patts": ["[0-9]+?p[0-9]+"],
-		"style": " background:rgba(255,255,255,.8); margin:0 0 30px; text-decoration: none !important; "
+		"style": "margin:0 0 30px;text-decoration: none !important;"
 	},
 	"smbc-comics.com": {
 		"prev":  ".nav > a[rel=prev]",
@@ -36,7 +39,7 @@
 		"comic": "#cc-comic",
 		"after": "#aftercomic img",
 		"patts": ["[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]"],
-		"style": " background:rgba(255,255,255,.8); margin:0 0 16px; text-decoration: none !important; "
+		"style": "margin:0 0 16px;text-decoration: none !important;"
 	},
 	"mspaintadventures.com": {
 		"prev": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > span > b:nth-of-type(2) > a",
@@ -51,10 +54,6 @@
 		"next": "a[rel=next]"
 	},
 	"dresdencodak.com": {
-		"prev": "a[rel=prev]",
-		"next": "a[rel=next]"
-	},
-	"extrafabulouscomics.com": {
 		"prev": "a[rel=prev]",
 		"next": "a[rel=next]"
 	},
