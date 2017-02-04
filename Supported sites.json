@@ -1,98 +1,152 @@
 {
 	"qwantz.com": {
-		"prev":  "a[rel=prev]",
-		"next":  "a[rel=next]",
-		"comic": "img.comic",
-		"style": "background:rgba(255,255,255,.8);padding:7px;margin:7px 0;"
+		"nav": {
+			"prev":  "a[rel=prev]",
+			"next":  "a[rel=next]"
 		},
+		"alt": {
+			"comic": "img.comic",
+			"style": "background:rgba(255,255,255,.8);padding:7px;margin:7px 0;"
+		}
+	},
 	"daisyowl.com": {
-		"prev":  ".nav > a:first-of-type",
-		"next":  ".nav > a:last-of-type",
-		"comic": ".main > div:nth-of-type(2) img",
-		"style": "padding:7px;margin: 0 0 20px;"
+		"nav": {
+			"prev":  ".nav > a:first-of-type",
+			"next":  ".nav > a:last-of-type"
+		},
+		"alt": {
+			"comic": ".main > div:nth-of-type(2) img",
+			"style": "padding:7px;margin: 0 0 20px;"
+		}
 	},
 	"xkcd.com": {
-		"prev":  ".comicNav a[rel=prev]",
-		"next":  ".comicNav a[rel=next]",
-		"comic": "#comic > img",
-		"style": "margin:7px auto 30px;text-decoration: none !important;"
+		"nav": {
+			"prev":  ".comicNav a[rel=prev]",
+			"next":  ".comicNav a[rel=next]"
+		},
+		"alt": {
+			"comic": "#comic > img",
+			"style": "margin:7px auto 30px;text-decoration: none !important;"
+		}
 	},
 	"what-if.xkcd.com": {
-		"prev": ".nav-prev > a",
-		"next": ".nav-next > a",
-		"comic": "img.illustration",
-		"style": "margin:0 auto;text-decoration: none !important;font-style: oblique;",
-		"expand_s": ".refbody",
-		"expand_d": ".refnum",
-		"expand_c": "bottom:0;text-decoration: none;cursor: default;font-size: .75em;",
+		"nav": {
+			"prev": ".nav-prev > a",
+			"next": ".nav-next > a"
+		},
+		"alt": {
+			"comic": "img.illustration",
+			"style": "margin:0 auto;text-decoration: none !important;font-style: oblique;",
+		},
+		"exp": {
+			"source": ".refbody",
+			"destin": ".refnum",
+			"prefix": " [",
+			"suffix": "] ",
+			"style": "bottom:0;text-decoration: none;cursor: default;font-size: .75em;"
+		}
 	},
 	"drmcninja.com": {
-		"prev":  ".prepostnav > a.prev",
-		"next":  ".prepostnav > a.next",
+		"nav": {
+			"prev":  ".prepostnav > a.prev",
+			"next":  ".prepostnav > a.next"
+		},
 		"comic": "#comic > img",
-		"patts": ["[0-9]+?p[0-9]+"],
+		"ignore": ["[0-9]+?p[0-9]+"],
 		"style": "margin:0 0 30px;text-decoration: none !important;"
 	},
 	"smbc-comics.com": {
-		"prev":  ".nav > a[rel=prev]",
-		"next":  ".nav > a[rel=next]",
-		"comic": "#cc-comic",
-		"after": "#aftercomic img",
-		"patts": ["[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]"],
-		"style": "margin:0 0 16px;text-decoration: none !important;"
+		"nav": {
+			"prev":  ".nav > a[rel=prev]",
+			"next":  ".nav > a[rel=next]"
+		},
+		"alt": {
+			"comic": "#cc-comic",
+			"after": "#aftercomic img",
+			"ignore": ["[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]"],
+			"style": "margin:0 0 16px;text-decoration: none !important;"
+		}
 	},
 	"mspaintadventures.com": {
-		"prev": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > span > b:nth-of-type(2) > a",
-		"next": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > font:last-of-type > a",
-		"expand_s": ".spoiler > table",
-		"expand_d": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > center > div"
+		"nav": {
+			"prev": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > span > b:nth-of-type(2) > a",
+			"next": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > font:last-of-type > a"
+		},
+		"exp": {
+			"source": ".spoiler > table",
+			"destin": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > center > div"
+		}
 	},
 	"alicegrove.com": {
-		"prev": ".comic-pagination > a:nth-of-type(2)",
-		"next": ".comic-pagination > a:nth-of-type(3)"
+		"nav": {
+			"prev": ".comic-pagination > a:nth-of-type(2)",
+			"next": ".comic-pagination > a:nth-of-type(3)"
+		}
 	},
 	"buttersafe.com": {
-		"prev": "a[rel=prev]",
-		"next": "a[rel=next]"
+		"nav": {
+			"prev": "a[rel=prev]",
+			"next": "a[rel=next]"
+		}
 	},
 	"dresdencodak.com": {
-		"prev": "a[rel=prev]",
-		"next": "a[rel=next]"
+		"nav": {
+			"prev": "a[rel=prev]",
+			"next": "a[rel=next]"
+		}
 	},
 	"gunnerkrigg.com": {
-		"prev": ".extra > .nav > a.left",
-		"next": ".extra > .nav > a.right"
+		"nav": {
+			"prev": ".extra > .nav > a.left",
+			"next": ".extra > .nav > a.right"
+		}
 	},
 	"harkavagrant": {
-		"prev": "html > body > div > center > table > tbody > tr > td > center > a:first-of-type",
-		"next": "html > body > div > center > table > tbody > tr > td > center > a:last-of-type"
+		"nav": {
+			"prev": "html > body > div > center > table > tbody > tr > td > center > a:first-of-type",
+			"next": "html > body > div > center > table > tbody > tr > td > center > a:last-of-type"
+		}
 	},
 	"lackadaisycats.com": {
-		"prev": ".prev > a",
-		"next": ".next > a"
+		"nav": {
+			"prev": ".prev > a",
+			"next": ".next > a"
+		}
 	},
 	"paradoxspace.com": {
-		"prev": ".prev-page > a",
-		"next": ".next-page > a"
+		"nav": {
+			"prev": ".prev-page > a",
+			"next": ".next-page > a"
+		}
 	},
 	"poorlydrawnlines.com": {
-		"prev": "a[rel=prev]",
-		"next": "a[rel=next]"
+		"nav": {
+			"prev": "a[rel=prev]",
+			"next": "a[rel=next]"
+		}
 	},
 	"prequeladventure.com": {
-		"prev": ".previous > a[rel=prev]",
-		"next": ".next > a[rel=next]"
+		"nav": {
+			"prev": ".previous > a[rel=prev]",
+			"next": ".next > a[rel=next]"
+		}
 	},
 	"romanticallyapocalyptic.com": {
-		"prev": "a[accesskey=p]",
-		"next": "a[accesskey=n]"
+		"nav": {
+			"prev": "a[accesskey=p]",
+			"next": "a[accesskey=n]"
+		}
 	},
 	"samandfuzzy.com": {
-		"prev": ".prev-page > a",
-		"next": ".next-page > a"
+		"nav": {
+			"prev": ".prev-page > a",
+			"next": ".next-page > a"
+		}
 	},
 	"collectedcurios.com": {
-		"prev": "#nav > a:nth-of-type(3)",
-		"next": "#nav > a:nth-of-type(4)"
+		"nav": {
+			"prev": "#nav > a:nth-of-type(3)",
+			"next": "#nav > a:nth-of-type(4)"
+		}
 	}
 }
