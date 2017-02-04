@@ -1,32 +1,43 @@
 class ComicWebsite {
 	constructor(config) {
-		this.prev = document.querySelector(config.prev)
-		this.next = document.querySelector(config.next)
+		try { var prev = config['nav']['prev'] } catch(e) {}
+		try { var next = config['nav']['next'] } catch(e) {}
 
-		this.comic = document.querySelectorAll(config.comic)
-		this.after = document.querySelector(config.after)
-		this.patts = []
-		if (config.patts !== undefined) {
-			for (var i = config.patts.length - 1; i >= 0; i--) {
-				this.patts.push(new RegExp(config.patts[i], 'g'))
-			}
+		this['nav'] = {
+			'prev': document.querySelector(prev),
+			'next': document.querySelector(next)
 		}
-		this.style = config.style
 
-		this.expand_s = document.querySelectorAll(config.expand_s)
-		this.expand_d = document.querySelectorAll(config.expand_d)
-		this.expand_c = config.expand_c
+		try { var comic = config['alt']['comic'] } catch(e) {}
+		try { var after = config['alt']['after'] } catch(e) {}
+		try { var ignore = config['alt']['ignore'] } catch(e) {}
+		try { var a_style = config['alt']['style'] } catch(e) {}
 
-		this.addtl = config.addtl
-	}
+		this['alt'] = {
+			'comic': document.querySelectorAll(comic),
+			'after': document.querySelector(after),
+			'ignore': ignore,
+			'style': a_style
+		}
 
-	additionalCommands() {
-		return this.addtl
+		try { var source = config['exp']['source'] } catch(e) {}
+		try { var destin = config['exp']['destin'] } catch(e) {}
+		try { var e_style = config['exp']['style'] } catch(e) {}
+		try { var prefix = config['exp']['prefix'] } catch(e) {}
+		try { var suffix = config['exp']['suffix'] } catch(e) {}
+
+		this['exp'] = {
+			'source': document.querySelectorAll(source),
+			'destin': document.querySelectorAll(destin),
+			'prefix': prefix,
+			'suffix': suffix,
+			'style': e_style
+		}
 	}
 
 	navigate() {
-		var prev = this.prev
-		var next = this.next
+		var prev = this['nav']['prev']
+		var next = this['nav']['next']
 
 		// Following snippet adapted from Karl Ding, http://github.com/karlding
 		window.addEventListener('keydown', function(e) {
@@ -46,21 +57,22 @@ class ComicWebsite {
 	}
 
 	copy() {
-		if (this.comic !== []) {
-			for (var i = this.comic.length - 1; i >= 0; i--) {
-				var comic = this.comic[i]
+		if (this['alt']['comic'] !== []) {
+			for (var i = this['alt']['comic'].length - 1; i >= 0; i--) {
+				var comic = this['alt']['comic'][i]
 				var alt_data = comic.getAttribute('title')
 
-				if (this.patts !== []) {
-					for (var ii = this.patts.length - 1; ii >= 0; ii--) {
-						if (alt_data.search(this.patts[ii]) !== -1) {
+				if (this['alt']['ignore']) {
+					for (var ii = this['alt']['ignore'].length - 1; ii >= 0; ii--) {
+						var pattern = new RegExp(this['alt']['ignore'][ii], 'g')
+						if (alt_data.search(pattern) !== -1) {
 							alt_data = undefined
 							break
 						}
 					}
 				}
 
-				if (alt_data || this.after) {
+				if (alt_data || this['alt']['after']) {
 					var wrapper = document.createElement('div')
 					// comic.parentNode.appendChild(wrapper)
 					comic.parentNode.insertBefore(wrapper, comic.nextSibling)
@@ -71,12 +83,12 @@ class ComicWebsite {
 						var alt_text_node = document.createTextNode(alt_data)
 						alt_text.appendChild(alt_text_node)
 						wrapper.appendChild(alt_text)
-						if (this.style !== undefined) {
-							alt_text.setAttribute('style', 'text-align:center;' + this.style)
+						if (this['alt']['style'] !== undefined) {
+							alt_text.setAttribute('style', 'text-align:center;' + this['alt']['style'])
 						}
 					}
-					if (this.after) {
-						wrapper.insertAdjacentHTML('beforeend', this.after.outerHTML)
+					if (this['alt']['after']) {
+						wrapper.insertAdjacentHTML('beforeend', this['alt']['after'].outerHTML)
 						//comic.parentNode.insertBefore(wrapper, comic.nextSibling)
 					}
 					
@@ -87,19 +99,33 @@ class ComicWebsite {
 	}
 
 	expand() {
-		if (this.expand_s.length === this.expand_d.length && this.expand_s !== []) {
-			for (var i = this.expand_s.length - 1; i >= 0; i--) {
-				var source = this.expand_s[i]
-				var destin = this.expand_d[i]
+		if (this['exp']['source'].length === this['exp']['destin'].length && this['exp']['source'] !== []) {
+			for (var i = this['exp']['source'].length - 1; i >= 0; i--) {
+				var source = this['exp']['source'][i]
+				var destin = this['exp']['destin'][i]
+				var prefix = this['exp']['prefix']
+				var suffix = this['exp']['suffix']
 
-				if (this.expand_c) { destin.setAttribute('style', this.expand_c) }
-				destin.innerHTML = ' [' + source.innerHTML + '] '
+				if (this['exp']['style']) { destin.setAttribute('style', this['exp']['style']) }
+
+				if (prefix && suffix) {
+					destin.innerHTML = prefix + source.innerHTML + suffix
+				} else if (prefix && !suffix) {
+					destin.innerHTML = prefix + source.innerHTML
+				} else if (!prefix && suffix) {
+					destin.innerHTML = source.innerHTML + suffix
+				} else {
+					destin.innerHTML = source.innerHTML
+				}
+				
+
 				source.parentNode.removeChild(source)
 			}
 		}
 	}
 }
 
+// Following function from tggagne, http://stackoverflow.com/a/22076667
 function HttpClient() {
   this.get = function(aUrl, aCallback) {
     var anHttpRequest = new XMLHttpRequest();
@@ -132,8 +158,6 @@ function processWebsites(supported_data) {
 }
 
 (function() {
-	// Following class from tggagne, http://stackoverflow.com/a/22076667
-
 	if (sessionStorage['supported_data']) {
 		processWebsites(JSON.parse(sessionStorage['supported_data']))
 
