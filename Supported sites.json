@@ -25,7 +25,6 @@
 		"expand_s": ".refbody",
 		"expand_d": ".refnum",
 		"expand_c": "bottom:0;text-decoration: none;cursor: default;font-size: .75em;",
-		"addtl": true
 	},
 	"drmcninja.com": {
 		"prev":  ".prepostnav > a.prev",
@@ -45,9 +44,8 @@
 	"mspaintadventures.com": {
 		"prev": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > span > b:nth-of-type(2) > a",
 		"next": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > font:last-of-type > a",
-		"expand_s": ".spoiler",
-		"expand_d": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > center > div",
-		"addtl": true
+		"expand_s": ".spoiler > table",
+		"expand_d": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > center > div"
 	},
 	"alicegrove.com": {
 		"prev": ".comic-pagination > a:nth-of-type(2)",
