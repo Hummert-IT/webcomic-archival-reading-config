@@ -46,7 +46,7 @@
 		"prev": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > span > b:nth-of-type(2) > a",
 		"next": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > font:last-of-type > a",
 		"expand_s": ".spoiler",
-		"expand_d": ".spoiler < div",
+		"expand_d": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > center > div",
 		"addtl": true
 	},
 	"alicegrove.com": {
