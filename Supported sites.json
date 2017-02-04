@@ -51,9 +51,11 @@
 			"prev":  ".prepostnav > a.prev",
 			"next":  ".prepostnav > a.next"
 		},
-		"comic": "#comic > img",
-		"ignore": ["[0-9]+?p[0-9]+"],
-		"style": "margin:0 0 30px;text-decoration: none !important;"
+		"alt": {
+			"comic": "#comic > img",
+			"ignore": ["[0-9]+?p[0-9]+"],
+			"style": "margin:0 0 30px;text-decoration: none !important;"
+		}
 	},
 	"smbc-comics.com": {
 		"nav": {
