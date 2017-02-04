@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Micah Hummert</string>
+	<key>Builder Version</key>
+	<string>12602.4.8</string>
+	<key>CFBundleDisplayName</key>
+	<string>Webcomic Archival Reading</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.hummert-it.archival-reading</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>global.html</string>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>Main.js</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Lightweight tool to make reading webcomic archives more enjoyable.</string>
+	<key>DeveloperIdentifier</key>
+	<string>MLTC3D3XXE</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Allowed Domains</key>
+			<array>
+				<string>*.daisyowl.com</string>
+				<string>*.xkcd.com</string>
+				<string>*.drmcninja.com</string>
+				<string>*.smbc-comics.com</string>
+				<string>*.qwantz.com</string>
+				<string>*.mspaintadventures.com</string>
+				<string>*.alicegrove.com</string>
+				<string>*.buttersafe.com</string>
+				<string>*.dresdencodak.com</string>
+				<string>*.gunnerkrigg.com</string>
+				<string>*.harkavagrant.com</string>
+				<string>*.lackadaisycats.com</string>
+				<string>*.paradoxspace.com</string>
+				<string>*.poorlydrawnlines.com</string>
+				<string>*.prequeladventure.com</string>
+				<string>*.romanticallyapocalyptic.com</string>
+				<string>*.samandfuzzy.com</string>
+				<string>*.collectedcurios.com</string>
+			</array>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>Some</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
