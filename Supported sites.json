@@ -74,6 +74,9 @@
 			"prev": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > span > b:nth-of-type(2) > a",
 			"next": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > font:last-of-type > a"
 		},
+		"alt": {
+			"comic": "html > body > table > tbody > tr > td > table > tbody > tr > td > span > b > center > a > img"
+		},
 		"exp": {
 			"source": ".spoiler > table",
 			"destin": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > center > div",
