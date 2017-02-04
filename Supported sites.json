@@ -75,7 +75,7 @@
 		"exp": {
 			"source": ".spoiler > table",
 			"destin": "html > body > center > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > center > table > tbody > tr > td > table > tbody > tr > td > center > div",
-			"style": "text-align: center;"
+			"style": "text-align: left;"
 		}
 	},
 	"alicegrove.com": {
