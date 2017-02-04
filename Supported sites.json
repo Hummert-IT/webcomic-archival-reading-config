@@ -24,7 +24,7 @@
 		"style": "margin:0 auto;text-decoration: none !important;font-style: oblique;",
 		"expand_s": ".refbody",
 		"expand_d": ".refnum",
-		"expand_c": "bottom:0;text-decoration: none;cursor: default;"
+		"expand_c": "bottom:0;text-decoration: none;cursor: default;font-size: .75em;"
 	},
 	"drmcninja.com": {
 		"prev":  ".prepostnav > a.prev",
