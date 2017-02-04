@@ -16,6 +16,12 @@ class ComicWebsite {
 		this.expand_s = document.querySelectorAll(config.expand_s)
 		this.expand_d = document.querySelectorAll(config.expand_d)
 		this.expand_c = config.expand_c
+
+		this.addtl = config.addtl
+	}
+
+	additionalCommands() {
+		return this.addtl
 	}
 
 	navigate() {
@@ -86,22 +92,34 @@ class ComicWebsite {
 				var source = this.expand_s[i]
 				var destin = this.expand_d[i]
 
-				destin.setAttribute('style', this.expand_c)
-				destin.innerHTML = ' [' + source.innerHTML '] '
+				if (this.expand_c) { destin.setAttribute('style', this.expand_c) }
+				destin.innerHTML = ' [' + source.innerHTML + '] '
 				source.parentNode.removeChild(source)
 			}
 		}
 	}
 }
 
-function processWebsites(response) {
-	var supported_data = JSON.parse(response)
+function HttpClient() {
+  this.get = function(aUrl, aCallback) {
+    var anHttpRequest = new XMLHttpRequest();
+    anHttpRequest.onreadystatechange = function() { 
+      if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+        aCallback(anHttpRequest.responseText);
+    }
+
+    anHttpRequest.open( "GET", aUrl, true );            
+    anHttpRequest.send( null );
+  }
+}
+
+function processWebsites(supported_data) {
 	var supported_sites = Object.keys(supported_data)
 	var host = window.location.hostname
 
 	for (var i = supported_sites.length - 1; i >= 0; i--) {
 		var supported_site = supported_sites[i]
-		if (host.search(supported_site) !== -1){
+		if (host.search(supported_site) !== -1) {
 			site = new ComicWebsite(supported_data[supported_site])
 			site.navigate()
 			site.expand()
@@ -115,39 +133,15 @@ function processWebsites(response) {
 
 (function() {
 	// Following class from tggagne, http://stackoverflow.com/a/22076667
-	var HttpClient = function() {
-	  this.get = function(aUrl, aCallback) {
-	    var anHttpRequest = new XMLHttpRequest();
-	    anHttpRequest.onreadystatechange = function() { 
-	      if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-	        aCallback(anHttpRequest.responseText);
-	    }
 
-	    anHttpRequest.open( "GET", aUrl, true );            
-	    anHttpRequest.send( null );
-	  }
-	}
-
-	if (sessionStorage.supported_data) {
-		processWebsites(JSON.parse(sessionStorage.supported_data))
+	if (sessionStorage['supported_data']) {
+		processWebsites(JSON.parse(sessionStorage['supported_data']))
 
 	} else {
 		var client = new HttpClient()
 		client.get('https://raw.githubusercontent.com/Hummert-IT/webcomic-reading/master/Supported%20sites.json', function(response) {
-			sessionStorage.supported_data = response
-			processWebsites(response)
+			sessionStorage['supported_data'] = response
+			processWebsites(JSON.parse(response))
 		})
 	}
-
-	
-
-	// Dialog button cleanup for macOS
-	//	var button_selector = '.button'
-	//	var button_element = document.querySelector(button_selector)
-	//	if (button_element !== null) {
-	//		button_element.removeAttribute('onmouseover')
-	//		button_element.removeAttribute('onmouseout')
-	//		button_element.click()
-	//	}
-	//}
 })()

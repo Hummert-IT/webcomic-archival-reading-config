@@ -113,16 +113,6 @@ function HttpClient() {
   }
 }
 
-function doAdditionalCommands(host) {
-	if (sessionStorage[host]) {
-		JSON.parse(sessionStorage[host])
-	}
-	var client = new HttpClient()
-	client.get('', function(response) {
-
-	})
-}
-
 function processWebsites(supported_data) {
 	var supported_sites = Object.keys(supported_data)
 	var host = window.location.hostname
@@ -131,7 +121,6 @@ function processWebsites(supported_data) {
 		var supported_site = supported_sites[i]
 		if (host.search(supported_site) !== -1) {
 			site = new ComicWebsite(supported_data[supported_site])
-			if (site.additionalCommands) { doAdditionalCommands(host) }
 			site.navigate()
 			site.expand()
 			window.onload = function() {
