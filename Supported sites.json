@@ -22,8 +22,8 @@
 		"next": ".nav-next > a",
 		"comic": "img.illustration",
 		"style": "margin:0 auto;text-decoration: none !important;font-style: oblique;",
-		"expand_s": ".refnum",
-		"expand_d": ".refbody",
+		"expand_s": ".refbody",
+		"expand_d": ".refnum",
 		"expand_c": "bottom:0;text-decoration: none;cursor: default;"
 	},
 	"drmcninja.com": {
