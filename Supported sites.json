@@ -6,7 +6,7 @@
 		},
 		"alt": {
 			"comic": "img.comic",
-			"style": "background:rgba(255,255,255,.8);padding:7px;margin:7px 0;"
+			"style": "text-align:center;background:rgba(255,255,255,.8);padding:7px;margin:7px 0;"
 		}
 	},
 	"daisyowl.com": {
@@ -16,7 +16,7 @@
 		},
 		"alt": {
 			"comic": ".main > div:nth-of-type(2) img",
-			"style": "padding:7px;margin: 0 0 20px;"
+			"style": "text-align:center;padding:7px;margin: 0 0 20px;"
 		}
 	},
 	"xkcd.com": {
@@ -26,7 +26,7 @@
 		},
 		"alt": {
 			"comic": "#comic > img",
-			"style": "margin:7px auto 30px;text-decoration: none !important;"
+			"style": "text-align:center;margin:7px auto 30px;text-decoration: none !important;"
 		}
 	},
 	"what-if.xkcd.com": {
@@ -36,7 +36,7 @@
 		},
 		"alt": {
 			"comic": "img.illustration",
-			"style": "margin:0 auto;text-decoration: none !important;font-style: oblique;"
+			"style": "text-align:center;margin:0 auto;text-decoration: none !important;font-style: oblique;"
 		},
 		"exp": {
 			"source": ".refbody",
@@ -54,7 +54,7 @@
 		"alt": {
 			"comic": "#comic > img",
 			"ignore": ["[0-9]+?p[0-9]+"],
-			"style": "margin:0 0 30px;text-decoration: none !important;"
+			"style": "text-align:center;margin:0 0 30px;text-decoration: none !important;"
 		}
 	},
 	"smbc-comics.com": {
@@ -66,7 +66,7 @@
 			"comic": "#cc-comic",
 			"after": "#aftercomic img",
 			"ignore": ["[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]"],
-			"style": "margin:0 0 16px;text-decoration: none !important;"
+			"style": "text-align:center;margin:0 0 16px;text-decoration: none !important;"
 		}
 	},
 	"mspaintadventures.com": {
