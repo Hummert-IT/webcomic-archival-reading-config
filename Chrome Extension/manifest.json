@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 2.1,
 
   "name": "Webcomic Archival Reading",
   "description": "Lightweight tool to make reading webcomic archives more enjoyable.",
@@ -33,7 +33,7 @@
         "*://*.samandfuzzy.com/*",
         "*://*.collectedcurios.com/*"
       ],
-      "js": ["content.js"]
+      "js": ["Webcomic archival reading.js"]
     }
   ]
 }

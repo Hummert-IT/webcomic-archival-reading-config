@@ -13,11 +13,13 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Chrome</key>
 	<dict>
+		<key>Database Quota</key>
+		<integer>1048576</integer>
 		<key>Global Page</key>
 		<string>global.html</string>
 	</dict>
@@ -27,7 +29,7 @@
 		<dict>
 			<key>End</key>
 			<array>
-				<string>Main.js</string>
+				<string>Webcomic archival reading.js</string>
 			</array>
 		</dict>
 	</dict>
@@ -53,7 +55,7 @@
 				<string>*.buttersafe.com</string>
 				<string>*.dresdencodak.com</string>
 				<string>*.gunnerkrigg.com</string>
-				<string>*.harkavagrant.com</string>
+				<string>*.harkavagrant.coms</string>
 				<string>*.lackadaisycats.com</string>
 				<string>*.paradoxspace.com</string>
 				<string>*.poorlydrawnlines.com</string>
