@@ -58,10 +58,6 @@
 		}
 	},
 	"smbc-comics.com": {
-		"nav": {
-			"prev":  ".nav > a[rel=prev]",
-			"next":  ".nav > a[rel=next]"
-		},
 		"alt": {
 			"comic": "#cc-comic",
 			"after": "#aftercomic img",
